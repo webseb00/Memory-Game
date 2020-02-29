@@ -1,5 +1,7 @@
-const sayHello = (str) => {
-    document.querySelector('.title').textContent = str;
-}
+import '../scss/style.scss';
 
-sayHello('Hello memo app!');
+// const sayHello = (str) => {
+//     document.querySelector('.title').textContent = str;
+// }
+
+// sayHello('Hello memo app!');

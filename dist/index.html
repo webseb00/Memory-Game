@@ -1,15 +1,42 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="UTF-8">
-    <title>Memory Game App</title>
-  </head>
+    <head>
+        <meta charset="UTF-8">
+        <title>Memory Game App</title>
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600&display=swap" rel="stylesheet">
+    </head>
+    <body>
 
-  <body>
+        <!-- Main Container -->
+        <div class="container">
+            <!-- Modal Box -->
+            <div class="modal">
+                <div class="modal__content">
+                    <div class="modal__title">
+                        <h3 class="modal__heading">Memory Game App</h3>
+                    </div>
+                    <div class="modal__group">
+                        <input type="text" id="input-name" class="modal__name" required />
+                        <label for="input-name" class="modal__label">Player name</label>
+                        <span class="modal__bar"></span>
+                    </div>
+                    <div class="modal__levels">
+                        <button type="button" id="btn-easy" class="btn btn__level">Easy (3x3)</button>
+                        <button type="button" id="btn-medium" class="btn btn__level">Medium (4x4)</button>
+                        <button type="button" id="btn-hard" class="btn btn__level">Hard (6x6)</button>
+                    </div>
+                    <div class="modal__start">
+                        <button type="button" id="btn-start" class="btn btn__start">Start Game!</button>
+                    </div>
+                </div>
+            </div>
+            <!-- Game Board -->
+            <div class="board">
+                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Illo minus ratione inventore! Qui voluptate quaerat, repellendus accusantium ea iure voluptates sapiente rem quas ducimus vel non voluptas necessitatibus nostrum delectus vitae dignissimos sequi itaque quidem! Sint deserunt totam, asperiores adipisci corrupti voluptates dicta aliquam quisquam beatae ipsa iste enim facere?</p>
+            </div>
+        </div>
 
-    <h1 class="title"></h1>
-
-  </body>
-  <!-- SCRIPTS FILES -->
-  <script type="text/javascript" src="app-bundle.js"></script>
+    <!-- Scripts -->
+    
+    </body>
 </html>

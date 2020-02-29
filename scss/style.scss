@@ -1,0 +1,145 @@
+*,
+*::after,
+*::before {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+// COLORS VARIABLES:
+$main_blue: #3498db;
+$white_color: #ffffff;
+
+body {
+    font-family: 'Open Sans', sans-serif;
+    background: $main_blue;
+}
+
+.container {
+    max-width: 1140px;
+    width: 100%;
+    margin: 0 auto;
+}
+
+.btn {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    color: #fff;
+    outline: none;
+    border: none;
+    background: none;
+    text-transform: uppercase;
+    cursor: pointer;
+    box-shadow: 0 1px 10px -5px rgba(0,0,0,.8);
+    padding: 10px 15px;
+    width: 180px;
+    border: 2px solid $white_color;
+    margin: 5px 0;
+    transition: .4s ease-in-out;
+    position: relative;
+    overflow: hidden;
+}
+
+.btn::before {
+    content: '';
+    display: block;
+    position: absolute;
+    left: 0;
+    bottom: -100%;
+    width: 100%;
+    height: 100%;
+    background: $white_color;
+    transition: .4s ease-in-out;
+    z-index: -10;
+}
+
+.btn:hover::before {
+    bottom: 0;
+}
+
+.btn:hover {
+    color: $main_blue;
+}
+
+// Modal Box Styles
+
+.modal {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    padding: 20px;
+    background: #34495e;
+
+    &__content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-top: 10%;
+    }
+
+    &__heading {
+        color: $white_color;
+    }
+
+    &__group {
+        margin: 30px 0;
+        position: relative;
+    }
+
+    &__name {
+        background: none;
+        outline: none;
+        border: none;
+        font-size: 16px;
+        border-bottom: 2px solid $white_color;
+        color: $white_color;
+        width: 180px;
+        padding: 10px 0;
+        letter-spacing: 1px;
+    }
+
+    &__name:focus ~ &__label,
+    &__name:valid ~ &__label {
+        top: -15px;
+        font-size: 12px;
+        color: $main_blue;
+    }
+
+    &__name:focus ~ &__bar,
+    &__name:valid ~ &__bar {
+        width: 100%;
+    }
+ 
+    &__label {
+        position: absolute;
+        left: 0;
+        font-size: 16px;
+        color: #fff;
+        letter-spacing: 1px;
+        top: 7px;
+        transition: .3s ease-in-out;
+        z-index: -1;
+    }
+
+    &__bar {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        display: block;
+        height: 2px;
+        background: $main_blue;
+        width: 0%;
+        transition: .3s ease-in-out;
+    }
+
+    &__levels {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    &__start {
+        margin: 30px 0;
+    }
+}
