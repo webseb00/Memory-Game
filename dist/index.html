@@ -4,6 +4,7 @@
         <meta charset="UTF-8">
         <title>Memory Game App</title>
         <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600&display=swap" rel="stylesheet">
+        <script src="../src/svg-inject.min.js"></script>
     </head>
     <body>
 
@@ -35,73 +36,14 @@
             <div class="board">
                 <div class="board__content">
                     <div class="board__info">
-
+                        <div class="board__level">Level: Medium</div>
+                        <div class="board__time">Time: <span>00:00</span></div>
+                        <div class="board__moves">Moves: 9</div>
+                        <button type="button" id="btn-restart" class="btn">Restart</button>
                     </div>
                     <!-- Board Cards -->
                     <div class="board__cards">
-                        <div class="board__card">
-                            <div class="board__card-side board__card--front">
-                            </div>
-                            <div class="board__card-side board__card--back">
-                                <img src="../icons/PNG/Space icons (1).png" alt="icon card" class="img-fluid" />
-                            </div>
-                        </div>
-                        <div class="board__card">
-                            <div class="board__card-side board__card--front">
-                            </div>
-                            <div class="board__card-side board__card--back">
-                                <img src="../icons/PNG/Space icons (2).png" alt="icon card" class="img-fluid" />
-                            </div>
-                        </div>
-                        <div class="board__card">
-                            <div class="board__card-side board__card--front">
-                            </div>
-                            <div class="board__card-side board__card--back">
-                                <img src="../icons/PNG/Space icons (3).png" alt="icon card" class="img-fluid" />
-                            </div>
-                        </div>
-                        <div class="board__card">
-                            <div class="board__card-side board__card--front">
-                            </div>
-                            <div class="board__card-side board__card--back">
-                                <img src="../icons/PNG/Space icons (4).png" alt="icon card" class="img-fluid" />
-                            </div>
-                        </div>
-                        <div class="board__card">
-                            <div class="board__card-side board__card--front">
-                            </div>
-                            <div class="board__card-side board__card--back">
-                                <img src="../icons/PNG/Space icons (5).png" alt="icon card" class="img-fluid" />
-                            </div>
-                        </div>
-                        <div class="board__card">
-                            <div class="board__card-side board__card--front">
-                            </div>
-                            <div class="board__card-side board__card--back">
-                                <img src="../icons/PNG/Space icons (6).png" alt="icon card" class="img-fluid" />
-                            </div>
-                        </div>
-                        <div class="board__card">
-                            <div class="board__card-side board__card--front">
-                            </div>
-                            <div class="board__card-side board__card--back">
-                                <img src="../icons/PNG/Space icons (7).png" alt="icon card" class="img-fluid" />
-                            </div>
-                        </div>
-                        <div class="board__card">
-                            <div class="board__card-side board__card--front">
-                            </div>
-                            <div class="board__card-side board__card--back">
-                                <img src="../icons/PNG/Space icons (8).png" alt="icon card" class="img-fluid" />
-                            </div>
-                        </div>
-                        <div class="board__card">
-                            <div class="board__card-side board__card--front">
-                            </div>
-                            <div class="board__card-side board__card--back">
-                                <img src="../icons/PNG/Space icons (9).png" alt="icon card" class="img-fluid" />
-                            </div>
-                        </div>
+                        <!-- Append memory card -->
                     </div>
                 </div>
             </div>
