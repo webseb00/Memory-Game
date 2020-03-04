@@ -19,11 +19,12 @@
                     <label for="input-name" class="modal__label">Player name</label>
                     <span class="modal__bar"></span>
                 </div>
-                <div class="modal__levels">
-                    <button type="button" id="btn-easy" class="btn btn__level">Easy (3x3)</button>
-                    <button type="button" id="btn-medium" class="btn btn__level">Medium (4x4)</button>
-                    <button type="button" id="btn-hard" class="btn btn__level">Hard (6x6)</button>
-                </div>
+                <select name="levels" class="modal__select">
+                    <option value="" disabled>-- Choose level ---</option>
+                    <option value="easy" selected>Easy</option>
+                    <option value="medium">Medium</option>
+                    <option value="hard">Hard</option>
+                </select>
                 <div class="modal__start">
                     <button type="button" id="btn-start" class="btn btn__start">Start Game!</button>
                 </div>
@@ -37,9 +38,14 @@
                 <div class="board__content">
                     <div class="board__info">
                         <div class="board__level">Level: Medium</div>
-                        <div class="board__time">Time: <span>00:00</span></div>
+                        <div class="board__time">
+                            <ion-icon class="board__info-icon" name="alarm-outline"></ion-icon>
+                            <span class="board__time-counter">00:00</span>
+                        </div>
                         <div class="board__moves">Moves: 9</div>
-                        <button type="button" id="btn-restart" class="btn">Restart</button>
+                        <button class="board__restart btn-restart" type="button">
+                            <ion-icon class="board__info-icon" name="reload-circle-outline"></ion-icon>
+                        </button>
                     </div>
                     <!-- Board Cards -->
                     <div class="board__cards">
@@ -50,6 +56,6 @@
         </div>
 
     <!-- Scripts -->
-    
+    <script src="https://unpkg.com/ionicons@5.0.0/dist/ionicons.js"></script>
     </body>
 </html>
