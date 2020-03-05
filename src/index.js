@@ -93,9 +93,9 @@ import '../scss/style.scss';
         // based on selected level, pass number of cards to generate
         let val;
 
-        if(selectInput.value === 'easy') { val = 6 };
-        if(selectInput.value === 'medium') { val = 8 };
-        if(selectInput.value === 'hard') { val = 10 };
+        if(selectInput.value === 'Easy') { val = 6 };
+        if(selectInput.value === 'Medium') { val = 8 };
+        if(selectInput.value === 'Hard') { val = 10 };
 
         createCards(val);
     };
