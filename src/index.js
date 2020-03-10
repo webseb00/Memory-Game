@@ -1,7 +1,7 @@
 import '../scss/style.scss';
 
 (function() {
-
+    // game & players data
     let data = {
         player: {
             name: '',
@@ -10,9 +10,14 @@ import '../scss/style.scss';
             time: ''
         },
         firstCard: null,
-        secondCard: null
+        secondCard: null,
+        counter: false,
+        movesToFinish: null,
+        playersCards: null
     };
-
+    // global variable for timer
+    let timer;
+    // selectors to the dom
     const DOMSelectors = {
         nameInput: document.querySelector('#input-name'),
         selectInput: document.querySelector('.modal__select'),
@@ -21,7 +26,9 @@ import '../scss/style.scss';
         boardCards: document.querySelector('.board__cards'),
         boardName: document.querySelector('.board__name'),
         boardLevel: document.querySelector('.board__level'),
-        boardTime: document.querySelector('.board__time'),
+        boardTime: document.querySelector('.board__time-counter'),
+        boardMoves: document.querySelector('.board__moves'),
+        restartButton: document.querySelector('.board__restart'),
         modal: document.querySelector('.modal')
     };
 
@@ -54,13 +61,16 @@ import '../scss/style.scss';
         cards.push(getCards);
         // mix randomly cards in array
         const shuffleCards = cards.flat().sort(() => 0.5 - Math.random());
+        data.playersCards = shuffleCards;
+        // get number of moves to finish tthe game
+        data.movesToFinish = data.playersCards.length / 2;
         // pass cards to displayCards function
         displayCards(shuffleCards);
-    }
+    };
 
     const displayCards = (cards) => {
         let element;
-        cards.forEach((card, index) => {
+        cards.forEach(card => {
             element = 
             `<div id=${card} class="board__card">
                 <div class="board__card-side board__card--front">
@@ -76,18 +86,53 @@ import '../scss/style.scss';
         DOMSelectors.modal.classList.add('hide');
         DOMSelectors.board.classList.add('show');
 
+        // attach click listener to board cards
+        DOMSelectors.boardCards.addEventListener('click', (e) => game(e));
+
         displayGameInfo();
     }
 
     const displayGameInfo = () => {
+        // display info on players name and level
         DOMSelectors.boardName.innerText = `Player: ${data.player.name}`;
         DOMSelectors.boardLevel.innerText = `Level: ${data.player.level}`;
+        DOMSelectors.boardMoves.innerText = `Moves to Finish: ${data.movesToFinish}`;
+    };
 
-        DOMSelectors.boardCards.addEventListener('click', (e) => game(e));
+    const displayTimer = () => {
+        let minutes = 0,
+            seconds = 0;
+
+        timer = setInterval(() => {
+            if(seconds <= 59) {
+                seconds++;
+                if(seconds < 10) {
+                    seconds = '0' + seconds;
+                }
+                if(seconds >= 59) {
+                    minutes++;
+                    seconds = 0;
+                    seconds = '0' + seconds;
+                }
+            }
+            DOMSelectors.boardTime.textContent = `${minutes}:${seconds}`;
+        }, 1000);
+    };
+
+    const checkGameResult = () => {
+        if(data.movesToFinish === 0) {
+            clearInterval(timer);
+            data.player.time = DOMSelectors.boardTime.textContent;
+        }
     };
 
     const game = (e) => {
-
+        // check if timer is working, if not set counter to true and start counting
+        if(data.counter === false) {
+            data.counter = true; 
+            displayTimer(); 
+        }
+        // check if board card was clicked
         if(e.target.parentElement.classList.contains('board__card')) {
             if(data.firstCard === null) {
                 data.firstCard = e.target.parentElement;
@@ -96,31 +141,42 @@ import '../scss/style.scss';
                 data.secondCard = e.target.parentElement;
                 e.target.parentElement.classList.add('rotate');
                 DOMSelectors.boardCards.style.pointerEvents = "none";
+                    // check if cards are different...
                     if(data.firstCard.id !== data.secondCard.id) {
                         setTimeout(() => {
                             data.firstCard.classList.remove('rotate');
                             data.secondCard.classList.remove('rotate');
                             DOMSelectors.boardCards.style.pointerEvents = "auto";
+                            // remove cards from data
                             data.firstCard = null;
                             data.secondCard = null;
-                        }, 1500);
+                        }, 1000);
                     } else {
+                        // check if cards are similar
                             data.firstCard.style.pointerEvents = "none";
                             data.secondCard.style.pointerEvents = "none";
                             DOMSelectors.boardCards.style.pointerEvents = "auto";
+                            // update player cards and count total moves to finish the game
+                            const updateCardsArray = data.playersCards.filter(card => card !== data.firstCard.id);
+                            // data.playersCards = null;
+                            data.playersCards = [...updateCardsArray];
+                            data.movesToFinish -= 1;
+                            // remove cards from data
                             data.firstCard = null;
                             data.secondCard = null;
+                            displayGameInfo();
                     }
+                }
             }
-          
-        }
+        // keep game info up to date
+        checkGameResult();
     };
 
     const startGame = () => {
         const { nameInput, selectInput } = DOMSelectors;
         // check validity of input
         if(nameInput.value === '') {
-            return console.log('Type your name!');
+            return alert('Please add your name!');
         }
         // assign values from fields into games data object
         data.player.name = nameInput.value;
@@ -135,11 +191,16 @@ import '../scss/style.scss';
         createCards(val);
     };
 
+    const restartGame = () => {
+
+    }
+
     const initListeners = () => {
         DOMSelectors.startButton.addEventListener('click', startGame);
         window.addEventListener('keydown', (e) => {
             if(e.keyCode === 13) { startGame(); };
         });
+        DOMSelectors.restartButton.addEventListener('click', restartGame);
     };
 
     const init = () => {
