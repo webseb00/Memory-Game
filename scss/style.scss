@@ -43,13 +43,22 @@ img {
     cursor: pointer;
     box-shadow: 0 2px 5px 0px rgba(0, 0, 0, 0.4);
     padding: 10px 15px;
-    width: 100%;
     border: 2px solid $white_color;
     border-radius: 5px;
     margin: 5px 0;
     transition: .4s ease-in-out;
     position: relative;
     overflow: hidden;
+
+    &__width {
+        &--100 {
+            width: 100%;
+        }
+
+        &--160 {
+            width: 160px;
+        }
+    }
 }
 
 .btn::before {
@@ -70,7 +79,7 @@ img {
 }
 
 .btn:hover {
-    color: #34495e;
+    color: $navy_blue;
     box-shadow: 0 6px 5px 0px rgba(0, 0, 0, 0.4);
 }
 
@@ -208,7 +217,7 @@ img {
 
     &__cards {
         display: inline-grid;
-        grid-template-columns: repeat(5, 120px);
+        grid-template-columns: repeat(4, 120px);
         grid-column-gap: 10px;
         grid-row-gap: 10px;
         justify-content: center;
@@ -261,5 +270,41 @@ img {
     &.show {
         display: block;
     }
+}
 
+// RESULT BOX
+
+.result {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: $navy_blue;
+
+    &__content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+    }
+
+    &__heading--name,
+    &__info--time {
+        color: $main_blue;
+    }
+
+    &__info {
+        margin: 5px 0;
+    }
+
+    &__cta {
+        margin: 20px 0;
+    }
+
+    &.show {
+        display: block;
+    }
 }

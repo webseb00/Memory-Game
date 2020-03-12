@@ -26,7 +26,7 @@
                     <option value="Hard">Hard</option>
                 </select>
                 <div class="modal__start">
-                    <button type="button" id="btn-start" class="btn btn__start">Start Game!</button>
+                    <button type="button" id="btn-start" class="btn btn__start btn__width--100">Start Game!</button>
                 </div>
             </div>
         </div>
@@ -44,14 +44,32 @@
                             <span class="board__time-counter">00:00</span>
                         </div>
                         <div class="board__moves">Moves: 9</div>
-                        <button class="board__restart btn-restart" type="button">
-                            <ion-icon class="board__info-icon" name="reload-circle-outline"></ion-icon>
-                        </button>
                     </div>
                     <!-- Board Cards -->
                     <div class="board__cards">
                         <!-- Append memory card -->
                     </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Result box -->
+        <div class="result">
+            <div class="result__content">
+                <h2 class="result__heading result__heading--h2">
+                    Congratulations,
+                    <span class="result__heading--name">Player</span>!
+                </h2>
+                <p class="result__info">
+                    You finished the game in 
+                    <span class="result__info--time">5:04</span>
+                </p>
+                <h4 class="result__heading result__heading--h4">
+                    Still not enough? Let's play again!
+                </h4>
+                <div class="result__cta">
+                    <button type="button" id="btn-newGame" class="btn btn__start btn__width--160">New Game</button>
+                    <!-- <button type="button" id="btn-restart" class="btn btn__restart btn__width--160">Restart Level</button> -->
                 </div>
             </div>
         </div>

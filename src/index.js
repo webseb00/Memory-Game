@@ -5,7 +5,6 @@ import '../scss/style.scss';
     let data = {
         player: {
             name: '',
-            moves: '',
             level: '',
             time: ''
         },
@@ -13,7 +12,8 @@ import '../scss/style.scss';
         secondCard: null,
         counter: false,
         movesToFinish: null,
-        playersCards: null
+        playersCards: null,
+        randomCards: null
     };
     // global variable for timer
     let timer;
@@ -22,14 +22,17 @@ import '../scss/style.scss';
         nameInput: document.querySelector('#input-name'),
         selectInput: document.querySelector('.modal__select'),
         startButton: document.querySelector('#btn-start'),
+        newGameButton: document.querySelector('#btn-newGame'),
         board: document.querySelector('.board'),
         boardCards: document.querySelector('.board__cards'),
         boardName: document.querySelector('.board__name'),
         boardLevel: document.querySelector('.board__level'),
         boardTime: document.querySelector('.board__time-counter'),
         boardMoves: document.querySelector('.board__moves'),
-        restartButton: document.querySelector('.board__restart'),
-        modal: document.querySelector('.modal')
+        modal: document.querySelector('.modal'),
+        result: document.querySelector('.result'),
+        resultTime: document.querySelector('.result__info--time'),
+        resultName: document.querySelector('.result__heading--name')
     };
 
     const getRandomElements = (arr, level) => {
@@ -60,15 +63,16 @@ import '../scss/style.scss';
         cards.push(getCards);
         cards.push(getCards);
         // mix randomly cards in array
-        const shuffleCards = cards.flat().sort(() => 0.5 - Math.random());
-        data.playersCards = shuffleCards;
+        data.randomCards = cards.flat().sort(() => 0.5 - Math.random());
+        data.playersCards = data.randomCards;
         // get number of moves to finish tthe game
         data.movesToFinish = data.playersCards.length / 2;
         // pass cards to displayCards function
-        displayCards(shuffleCards);
+        displayCards(data.randomCards);
     };
 
     const displayCards = (cards) => {
+        DOMSelectors.boardCards.innerHTML = '';
         let element;
         cards.forEach(card => {
             element = 
@@ -97,6 +101,7 @@ import '../scss/style.scss';
         DOMSelectors.boardName.innerText = `Player: ${data.player.name}`;
         DOMSelectors.boardLevel.innerText = `Level: ${data.player.level}`;
         DOMSelectors.boardMoves.innerText = `Moves to Finish: ${data.movesToFinish}`;
+        checkGameResult();
     };
 
     const displayTimer = () => {
@@ -121,8 +126,16 @@ import '../scss/style.scss';
 
     const checkGameResult = () => {
         if(data.movesToFinish === 0) {
+            // stop working of timer
             clearInterval(timer);
             data.player.time = DOMSelectors.boardTime.textContent;
+            // get time and name of player and show them in the result box
+            DOMSelectors.resultTime.textContent = data.player.time;
+            DOMSelectors.resultName.textContent = data.player.name;
+            // show result box after 3 seconds
+            setTimeout(() => {
+                DOMSelectors.result.classList.add('show');
+            }, 3000);
         }
     };
 
@@ -158,8 +171,8 @@ import '../scss/style.scss';
                             DOMSelectors.boardCards.style.pointerEvents = "auto";
                             // update player cards and count total moves to finish the game
                             const updateCardsArray = data.playersCards.filter(card => card !== data.firstCard.id);
-                            // data.playersCards = null;
-                            data.playersCards = [...updateCardsArray];
+                            data.playersCards = null;
+                            data.playersCards = updateCardsArray;
                             data.movesToFinish -= 1;
                             // remove cards from data
                             data.firstCard = null;
@@ -168,8 +181,6 @@ import '../scss/style.scss';
                     }
                 }
             }
-        // keep game info up to date
-        checkGameResult();
     };
 
     const startGame = () => {
@@ -191,22 +202,18 @@ import '../scss/style.scss';
         createCards(val);
     };
 
-    const restartGame = () => {
-
-    }
+    const newGame = () => {
+        window.location.reload();
+    };
 
     const initListeners = () => {
         DOMSelectors.startButton.addEventListener('click', startGame);
         window.addEventListener('keydown', (e) => {
             if(e.keyCode === 13) { startGame(); };
         });
-        DOMSelectors.restartButton.addEventListener('click', restartGame);
+        DOMSelectors.newGameButton.addEventListener('click', newGame);
     };
 
-    const init = () => {
-        initListeners();
-    };
-
-    init();
+    initListeners();
 
 })();
