@@ -59,33 +59,35 @@ img {
             width: 160px;
         }
     }
+
+    &::before {
+        content: '';
+        display: block;
+        position: absolute;
+        left: 0;
+        bottom: -100%;
+        width: 100%;
+        height: 100%;
+        background: $white_color;
+        transition: .4s ease-in-out;
+        z-index: -10;
+    }
+    
+    &:hover::before {
+        bottom: 0;
+    }
+    
+    &:hover {
+        color: $navy_blue;
+        box-shadow: 0 6px 5px 0px rgba(0, 0, 0, 0.4);
+    }
+    
+    &:focus {
+        box-shadow: 0 2px 5px 0px rgba(0, 0, 0, 0.4);
+    }
 }
 
-.btn::before {
-    content: '';
-    display: block;
-    position: absolute;
-    left: 0;
-    bottom: -100%;
-    width: 100%;
-    height: 100%;
-    background: $white_color;
-    transition: .4s ease-in-out;
-    z-index: -10;
-}
 
-.btn:hover::before {
-    bottom: 0;
-}
-
-.btn:hover {
-    color: $navy_blue;
-    box-shadow: 0 6px 5px 0px rgba(0, 0, 0, 0.4);
-}
-
-.btn:focus {
-    box-shadow: 0 2px 5px 0px rgba(0, 0, 0, 0.4);
-}
 
 // Modal Box Styles
 
@@ -95,6 +97,9 @@ img {
     height: 100%;
     padding: 20px;
     background: $navy_blue;
+    opacity: 1;
+    visibility: visible;
+    transition: 1s all;
 
     &__content {
         margin: 5% auto 0 auto;
@@ -172,7 +177,8 @@ img {
     }
 
     &.hide {
-        display: none;
+        opacity: 0;
+        visibility: hidden;
     }
 }
 
@@ -181,7 +187,9 @@ img {
 
 .board {
     margin: 60px 0 120px;
-    display: none;
+    opacity: 0;
+    visibility: hidden;
+    transition: 1s opacity 1s;
 
     &__info {
         display: flex;
@@ -253,7 +261,6 @@ img {
     }
 
     &__card--back {
-        // display: none;
         transform: rotateY(180deg);
         display: flex;
         align-items: center;
@@ -268,7 +275,8 @@ img {
     }
 
     &.show {
-        display: block;
+        visibility: visible;
+        opacity: 1;
     }
 }
 
@@ -282,6 +290,9 @@ img {
     width: 100%;
     height: 100%;
     background: $navy_blue;
+    visibility: hidden;
+    opacity: 0;
+    transition: 1s all;
 
     &__content {
         display: flex;
@@ -306,5 +317,7 @@ img {
 
     &.show {
         display: block;
+        visibility: visible;
+        opacity: 1;
     }
 }

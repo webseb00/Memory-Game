@@ -109,18 +109,20 @@ import '../scss/style.scss';
             seconds = 0;
 
         timer = setInterval(() => {
-            if(seconds <= 59) {
-                seconds++;
-                if(seconds < 10) {
-                    seconds = '0' + seconds;
-                }
-                if(seconds >= 59) {
-                    minutes++;
+            seconds++;
+
+            if(seconds >= 60) {
+                seconds = 0;
+                minutes++;
+                if(minutes >= 60) {
+                    minutes = 0;
                     seconds = 0;
-                    seconds = '0' + seconds;
                 }
             }
-            DOMSelectors.boardTime.textContent = `${minutes}:${seconds}`;
+
+            DOMSelectors.boardTime.textContent = (minutes < 10 ? `0${minutes.toString()}` : minutes) + 
+                                                 ':' + (seconds < 10 ? `0${seconds.toString()}` : seconds);
+
         }, 1000);
     };
 
@@ -135,7 +137,7 @@ import '../scss/style.scss';
             // show result box after 3 seconds
             setTimeout(() => {
                 DOMSelectors.result.classList.add('show');
-            }, 3000);
+            }, 2000);
         }
     };
 
