@@ -292,7 +292,7 @@ img {
     background: $navy_blue;
     visibility: hidden;
     opacity: 0;
-    transition: 1s all;
+    transition: 1s opacity;
 
     &__content {
         display: flex;
